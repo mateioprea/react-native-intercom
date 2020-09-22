@@ -11,7 +11,7 @@ npm install react-native-intercom
 ## Usage
 
 ```js
-import Intercom from "react-native-intercom";
+import Intercom from "react-native-intercom-native";
 
 // ...
 
