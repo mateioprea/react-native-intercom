@@ -9,6 +9,11 @@ class RNNIntercom: NSObject {
         super.init()
     }
     
+    @objc
+    static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+    
     @objc(setApiKey:appId:resolver:rejecter:)
     func setApiKey(apiKey: String, appId: String, resolver resolve:RCTPromiseResolveBlock, rejecter reject:RCTPromiseRejectBlock) -> Void {
         Intercom.setApiKey(apiKey, forAppId: appId)

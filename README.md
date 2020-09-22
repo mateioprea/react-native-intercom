@@ -5,7 +5,11 @@ Intercom implementation for react native
 ## Installation
 
 ```sh
-npm install react-native-intercom
+npm install react-native-intercom-native
+```
+
+```sh
+npx intercom-link
 ```
 
 ## Usage
