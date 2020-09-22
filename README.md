@@ -15,7 +15,7 @@ import Intercom from "react-native-intercom";
 
 // ...
 
-const result = await Intercom.multiply(3, 7);
+//TODO
 ```
 
 ## Contributing

@@ -11,7 +11,7 @@ import com.facebook.react.bridge.JavaScriptModule
 
 class IntercomPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(IntercomModule(reactContext))
+        return Arrays.asList<NativeModule>(RNNIntercomModule(reactContext))
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {

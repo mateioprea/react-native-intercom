@@ -1,17 +1,50 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import Intercom from 'react-native-intercom';
+import { useState } from 'react';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [isLauncherVisible, setIsLauncherVisible] = useState(false);
 
   React.useEffect(() => {
-    Intercom.multiply(3, 7).then(setResult);
+    async function initIntercom() {
+      await Intercom.setApiKey(
+        Platform.OS === 'android' ? 'android_api_key' : 'ios_api_key',
+        'app_id'
+      );
+      await Intercom.registerUser('');
+      setIsLauncherVisible(true);
+
+      //Intercom.setUserAttributes({});
+    }
+    initIntercom();
   }, []);
+
+  React.useEffect(() => {
+    console.log(isLauncherVisible);
+    Intercom.setLauncherVisible(isLauncherVisible);
+  }, [isLauncherVisible]);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity
+        onPress={() => setIsLauncherVisible(!isLauncherVisible)}
+      >
+        <Text>Trigger Visibility</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          Intercom.registerForPushNotifications();
+        }}
+      >
+        <Text>Register for push notifications</Text>
+      </TouchableOpacity>
     </View>
   );
 }

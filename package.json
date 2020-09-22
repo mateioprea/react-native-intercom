@@ -7,9 +7,11 @@
   "types": "lib/typescript/src/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
+  "nativePackage": true,
   "files": [
     "src",
     "lib",
+    "autolink",
     "android",
     "ios",
     "cpp",
@@ -28,6 +30,9 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
+  },
+  "bin": {
+    "intercom-link": "./autolink/postlink/run.js"
   },
   "keywords": [
     "react-native",
@@ -75,14 +80,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typescript"
     }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
   },
   "release-it": {
     "git": {

@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-
-		F4FF95D7245B92E800C19C63 /*  Intercom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  Intercom.swift */; };
-
-		5E555C0D2413F4C50049A1A2 /* Intercom.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* Intercom.mm */; };
+		910C3EC72514BA5F0049C995 /* UserAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C3EC62514BA5F0049C995 /* UserAttributes.swift */; };
+		919C44A9251395D400CADBEA /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919C44A8251395D400CADBEA /* Intercom.framework */; };
+		919C4527251397F500CADBEA /* Intercom.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* Intercom.m */; };
+		F4FF95D7245B92E800C19C63 /* Intercom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* Intercom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +27,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libIntercom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIntercom.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
-
+		910C3EC62514BA5F0049C995 /* UserAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAttributes.swift; sourceTree = "<group>"; };
+		919C44A8251395D400CADBEA /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* Intercom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Intercom.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* Intercom-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Intercom-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* Intercom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intercom.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				919C44A9251395D400CADBEA /* Intercom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,14 +57,29 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
-
+				910C3EC52514BA4E0049C995 /* Options */,
 				F4FF95D6245B92E800C19C63 /* Intercom.swift */,
 				B3E7B5891CC2AC0600A0062D /* Intercom.m */,
 				F4FF95D5245B92E700C19C63 /* Intercom-Bridging-Header.h */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
+				919C447A25138FDA00CADBEA /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		910C3EC52514BA4E0049C995 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				910C3EC62514BA5F0049C995 /* UserAttributes.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
+		919C447A25138FDA00CADBEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				919C44A8251395D400CADBEA /* Intercom.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +92,7 @@
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
+				919C45522513995D00CADBEA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -120,16 +135,34 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		919C45522513995D00CADBEA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Intercom.framework/strip-frameworks.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-
+				919C4527251397F500CADBEA /* Intercom.m in Sources */,
 				F4FF95D7245B92E800C19C63 /* Intercom.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* Intercom.m in Sources */,
-
+				910C3EC72514BA5F0049C995 /* UserAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +265,10 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -242,17 +279,19 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Intercom;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "Intercom-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -263,10 +302,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Intercom;
 				SKIP_INSTALL = YES;
-
 				SWIFT_OBJC_BRIDGING_HEADER = "Intercom-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-
 			};
 			name = Release;
 		};
