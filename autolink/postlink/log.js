@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 const bColors = {
   HEADER    : '\033[95m',
   OKBLUE    : '\033[94m',
@@ -8,9 +8,7 @@ const bColors = {
   ENDC      : '\033[0m',
   BOLD      : '\033[1m',
   UNDERLINE : '\033[4m'
-}`
-
-/* eslint-enable */`
+}
 
 const log = (text) => process.stdout.write(text);
 const logn = (text) => process.stdout.write(text + "\n");

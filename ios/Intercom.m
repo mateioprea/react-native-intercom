@@ -9,6 +9,7 @@ RCT_EXTERN_METHOD(setLauncherVisible:(BOOL)email resolver: (RCTPromiseResolveBlo
 RCT_EXTERN_METHOD(presentMessenger: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(registerForPushNotifications: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(logout: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(handlePushMessage: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(setUserAttributes: (NSDictionary) userAttributes)
 
 @end

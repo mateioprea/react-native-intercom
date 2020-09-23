@@ -1,11 +1,15 @@
 const fs = require('fs');
 const path = require('./path');
 const { errorn, logn, infon, warnn, debugn } = require('./log');
+const {argv} = require('yargs');
+const disableNotificationLink = argv.disableNotificationLink || false;
+
 class AppDelegateLinker {
   constructor() {
     this.appDelegatePath = path.appDelegate;
     this.dependenciesImported = false;
     this.applePushNotificationsImported = false;
+    this.didRegisterForRemoteNotificationsWithDeviceToken = false;
   }
 
   link() {
@@ -23,6 +27,12 @@ class AppDelegateLinker {
     appDelegateContents = this.importDependencies(appDelegateContents);
 
     if (this.dependenciesImported) {
+      fs.writeFileSync(this.appDelegatePath, appDelegateContents);
+    }
+
+    appDelegateContents = this.importRegisterMethod(appDelegateContents);
+
+    if (this.didRegisterForRemoteNotificationsWithDeviceToken) {
       fs.writeFileSync(this.appDelegatePath, appDelegateContents);
     }
 
@@ -61,32 +71,45 @@ class AppDelegateLinker {
     return /@import\s+Intercom/.test(content);
   }
 
-  importApplePushNotificationsMethods(content) {
-    if (!this.doesImportApplePushNotificationsMethods(content)) {
-      this.applePushNotificationsImported = true;
+  importRegisterMethod(content) {
+    if (!this.doesImportRegisterNotification(content)) {
+      this.didRegisterForRemoteNotificationsWithDeviceToken = true;
       return content.replace(
         /@end/,
         '- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {\n' +
-          '    [Intercom setDeviceToken:deviceToken];\n' +
-          '}\n' +
-          '\n' +
-          '- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {\n' +
-          '    if ([Intercom isIntercomPushNotification:userInfo]) {\n' +
-          '        [Intercom handleIntercomPushNotification:userInfo];\n' +
-          '    }\n' +
-          '    completionHandler(UIBackgroundFetchResultNoData);\n' +
-          '}\n@end'
+        '    [Intercom setDeviceToken:deviceToken];\n' +
+        '}\n@end'
+      )
+    }
+
+    warnn('AppDelegate already imports didRegisterForRemoteNotificationsWithDeviceToken');
+    return content;
+
+  }
+
+  importApplePushNotificationsMethods(content) {
+    if (!this.doesImportApplePushNotificationsMethods(content) && !disableNotificationLink) {
+      this.applePushNotificationsImported = true;
+      return content.replace(
+        /@end/,
+        '- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {\n' +
+        '    if ([Intercom isIntercomPushNotification:userInfo]) {\n' +
+        '        [Intercom handleIntercomPushNotification:userInfo];\n' +
+        '    }\n' +
+        '    completionHandler(UIBackgroundFetchResultNoData);\n' +
+        '}\n@end'
       );
     }
-    warnn('   AppDelegate already imports Apple Notifications Methods');
+    warnn('AppDelegate already imports didReceiveRemoteNotification');
     return content;
   }
 
+  doesImportRegisterNotification(content) {
+    return /didRegisterForRemoteNotificationsWithDeviceToken/.test(content);
+  }
+
   doesImportApplePushNotificationsMethods(content) {
-    return (
-      /didRegisterForRemoteNotificationsWithDeviceToken/.test(content) &&
-      /didReceiveRemoteNotification/.test(content)
-    );
+    return /didReceiveRemoteNotification/.test(content);
   }
 }
 

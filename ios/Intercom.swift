@@ -100,7 +100,7 @@ class RNNIntercom: NSObject {
             if (error == nil) {
                 resolve(nil)
             } else {
-                reject("Error", "Something bad happened.", nil)
+                reject("Error", "User denied push notifications.", nil)
             }
         })
     }
