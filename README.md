@@ -1,4 +1,9 @@
-# react-native-intercom
+# react-native-intercom-native
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-native-intercom-native"><img src="https://img.shields.io/npm/dw/react-native-intercom-native.svg?style=flat-square" alt="NPM downloads"></a>
+  <a href="https://www.npmjs.com/package/react-native-intercom-native"><img src="https://img.shields.io/npm/v/react-native-intercom-native/latest.svg?style=flat-square" alt="NPM latest version"></a>
+</p>
 
 Intercom implementation for react native
 
