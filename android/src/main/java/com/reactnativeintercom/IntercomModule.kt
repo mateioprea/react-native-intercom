@@ -2,9 +2,13 @@ package com.reactnativeintercom
 
 import android.app.Application
 import com.facebook.react.bridge.*
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.reactnativeintercom.options.UserAttributes
 import io.intercom.android.sdk.Intercom
 import io.intercom.android.sdk.identity.Registration
+import io.intercom.android.sdk.push.IntercomPushClient
 import org.json.JSONObject
 
 class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -49,6 +53,22 @@ class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBas
 
     @ReactMethod
     fun registerForPushNotifications(promise: Promise) {
+      val options = FirebaseOptions.fromResource(reactApplicationContext.applicationContext)
+      val intercomPushClient = IntercomPushClient()
+      if (options != null) {
+        FirebaseApp.initializeApp(reactApplicationContext.applicationContext)
+      };
+
+      if (FirebaseApp.getApps(reactApplicationContext.applicationContext).isEmpty()) {
+        promise.reject("");
+      } else {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+          val token = instanceIdResult.token
+          intercomPushClient.sendTokenToIntercom(reactApplicationContext.applicationContext as Application, token);
+          promise.resolve(null);
+        }
+      }
+
 
     }
 
