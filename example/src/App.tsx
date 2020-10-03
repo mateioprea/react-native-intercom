@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import Intercom from 'react-native-intercom';
+import Intercom from 'react-native-intercom-native';
 import { useState } from 'react';
 
 export default function App() {

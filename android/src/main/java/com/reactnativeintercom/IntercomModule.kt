@@ -9,7 +9,7 @@ import com.reactnativeintercom.options.UserAttributes
 import io.intercom.android.sdk.Intercom
 import io.intercom.android.sdk.identity.Registration
 import io.intercom.android.sdk.push.IntercomPushClient
-import org.json.JSONObject
+import io.intercom.android.sdk.UserAttributes as IntercomUserAttributes
 
 class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -31,8 +31,24 @@ class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBas
     }
 
     @ReactMethod
-    fun logout(promise: Promise) {
-      Intercom.client().logout()
+    fun registerUserWithIdentifier(email: String?, userId: String?, promise: Promise) {
+      val attributes: IntercomUserAttributes = io.intercom.android.sdk.UserAttributes.Builder()
+        .withUserId(userId)
+        .withEmail(email)
+        .build()
+      Intercom.client().registerIdentifiedUser(Registration.create().withUserAttributes(attributes))
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun registerUnidentifiedUser(promise: Promise) {
+      Intercom.client().registerUnidentifiedUser()
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun setUserHash(userHash: String?, promise: Promise) {
+      Intercom.client().setUserHash(userHash)
       promise.resolve(null)
     }
 
@@ -48,6 +64,63 @@ class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBas
     @ReactMethod
     fun presentMessenger(promise: Promise) {
       Intercom.client().displayMessenger()
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun hideMessenger(promise: Promise) {
+      Intercom.client().hideMessenger()
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun presentMessageComposer(initialMessage: String?, promise: Promise) {
+      Intercom.client().displayMessageComposer(initialMessage)
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun presentHelpCenter(promise: Promise) {
+      Intercom.client().displayHelpCenter()
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun setInAppMessagesVisible(visible: Boolean, promise: Promise) {
+      if (visible)
+        Intercom.client().setInAppMessageVisibility(Intercom.Visibility.VISIBLE)
+      else
+        Intercom.client().setInAppMessageVisibility(Intercom.Visibility.GONE)
+
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun getUnreadConversationCount(promise: Promise) {
+      val unreadConversationCount = Intercom.client().unreadConversationCount
+      promise.resolve(unreadConversationCount)
+    }
+
+    @ReactMethod
+    fun setUserAttributes(options: ReadableMap, promise: Promise) {
+      val userAttributes: UserAttributes = UserAttributes(options)
+      Intercom.client().updateUser(userAttributes.buildAttributes())
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun logEvent(name: String, metaData: ReadableMap?, promise: Promise) {
+      if (metaData != null) {
+        Intercom.client().logEvent(name, metaData.toHashMap())
+      } else {
+        Intercom.client().logEvent(name)
+      }
+      promise.resolve(null)
+    }
+
+    @ReactMethod
+    fun handlePushMessage(promise: Promise) {
+      Intercom.client().handlePushMessage();
       promise.resolve(null)
     }
 
@@ -68,19 +141,12 @@ class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBas
           promise.resolve(null);
         }
       }
-
-
     }
 
     @ReactMethod
-    fun setUserAttributes(options: ReadableMap) {
-      val userAttributes: UserAttributes = UserAttributes(options)
-      Intercom.client().updateUser(userAttributes.buildAttributes())
-    }
-
-    @ReactMethod
-    fun handlePushMessage(promise: Promise) {
-      Intercom.client().handlePushMessage();
+    fun logout(promise: Promise) {
+      Intercom.client().logout()
+      promise.resolve(null)
     }
 
 
