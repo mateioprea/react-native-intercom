@@ -8,9 +8,33 @@ User name
 | ------- | -------- | -------- |
 | string | No       | Both     |
 
+### `userId`
+
+User Id
+
+| Type    | Required | Platform |
+| ------- | -------- | -------- |
+| string | No       | Both     |
+
 ### `email`
 
-User name
+User email
+
+| Type    | Required | Platform |
+| ------- | -------- | -------- |
+| string | No       | Both     |
+
+### `phone`
+
+User phone
+
+| Type    | Required | Platform |
+| ------- | -------- | -------- |
+| string | No       | Both     |
+
+### `languageOverride`
+
+Language Override
 
 | Type    | Required | Platform |
 | ------- | -------- | -------- |
