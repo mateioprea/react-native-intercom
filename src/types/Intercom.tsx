@@ -14,7 +14,7 @@ export type Intercom = {
   setInAppMessagesVisible(visible: boolean): Promise<any>;
   getUnreadConversationCount(): Promise<any>;
   setUserAttributes(user: UserAttributes): void;
-  logEvent(name: string, userAttributes?: object): Promise<any>;
+  logEvent(name: string, metaData?: object): Promise<any>;
   handlePushMessage(): Promise<any>;
   registerForPushNotifications(): Promise<any>;
   logout(): Promise<any>;
