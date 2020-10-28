@@ -75,10 +75,11 @@ class AppDelegateLinker {
     if (!this.doesImportRegisterNotification(content)) {
       this.didRegisterForRemoteNotificationsWithDeviceToken = true;
       return content.replace(
-        /@end/,
+        /\@implementation AppDelegate/,
+        '@implementation AppDelegate \n' +
         '- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {\n' +
         '    [Intercom setDeviceToken:deviceToken];\n' +
-        '}\n@end'
+        '}\n'
       )
     }
 
@@ -91,13 +92,14 @@ class AppDelegateLinker {
     if (!this.doesImportApplePushNotificationsMethods(content) && !disableNotificationLink) {
       this.applePushNotificationsImported = true;
       return content.replace(
-        /@end/,
+        /\@implementation AppDelegate/,
+        '@implementation AppDelegate \n\n' +
         '- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {\n' +
         '    if ([Intercom isIntercomPushNotification:userInfo]) {\n' +
         '        [Intercom handleIntercomPushNotification:userInfo];\n' +
         '    }\n' +
         '    completionHandler(UIBackgroundFetchResultNoData);\n' +
-        '}\n@end'
+        '}\n'
       );
     }
     warnn('AppDelegate already imports didReceiveRemoteNotification');
