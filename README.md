@@ -65,7 +65,7 @@ This plugin already does the extra steps that are necessary to handle push notif
 
 ### Android
 
-On iOS you should follow steps 1, 3 and 4 (yes, without step 2) from Intercom documentation that's available [here](https://developers.intercom.com/installing-intercom/docs/android-fcm-push-notifications).
+On android you should follow steps 1, 3 and 4 (yes, without step 2) from Intercom documentation that's available [here](https://developers.intercom.com/installing-intercom/docs/android-fcm-push-notifications).
 
 After you generated the google-services.json file just place it in 'your_react_native_project_root/android/app/' folder. This is it. You're done.
 
