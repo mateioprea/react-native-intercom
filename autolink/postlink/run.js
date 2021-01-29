@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var postLinkIOS = require('./postLinkIOS');
+var postLinkiOS = require('./postLinkiOS');
 var postLinkAndroid = require('./postLinkAndroid');
-postLinkIOS();
+postLinkiOS();
 postLinkAndroid();
