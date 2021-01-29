@@ -55,9 +55,9 @@ class RNNIntercomModule(reactContext: ReactApplicationContext) : ReactContextBas
     @ReactMethod
     fun setLauncherVisible(visible: Boolean, promise: Promise) {
       if (visible)
-        Intercom.client().setLauncherVisibility(Intercom.Visibility.GONE)
-      else
         Intercom.client().setLauncherVisibility(Intercom.Visibility.VISIBLE)
+      else
+        Intercom.client().setLauncherVisibility(Intercom.Visibility.GONE)
       promise.resolve(null)
     }
 
