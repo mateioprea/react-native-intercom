@@ -22,7 +22,7 @@ RCT_EXTERN_METHOD(presentMessageComposer:(nullable NSString *)initialMessage res
 
 RCT_EXTERN_METHOD(presentHelpCenter: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(setInAppMessagesVisible: (Bool)visible resolver: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(setInAppMessagesVisible: (BOOL)visible resolver: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(getUnreadConversationCount: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
